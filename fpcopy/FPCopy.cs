@@ -167,7 +167,6 @@ namespace fpcopy {
                         Environment.Exit(ERROR_DESTINATION_FILE_EXISTS);
                     }
 
-                    //Console.Write("Copying: " + Path.GetFullPath(sourceFileStr) + " -> " + finalDestFile + " ");
                     Console.WriteLine("Copying... ");
                     Console.WriteLine("SrcFile: " + Path.GetFullPath(sourceFileStr));
                     Console.WriteLine("DstFile: " + finalDestFile);
