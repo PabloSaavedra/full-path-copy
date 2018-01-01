@@ -3,7 +3,7 @@ This command-line utility for Windows copies a file creating full source file pa
 
 # Usage
   `fpCopy source_file destination_directory [--overwrite] [--debug]`
-## Options:
+### Options
   `-o, --overwrite   Overwrite files`  
   `-d, --debug       Debug messages`  
 
