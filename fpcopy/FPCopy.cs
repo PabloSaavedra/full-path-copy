@@ -18,7 +18,7 @@ namespace fpcopy {
 
         static bool OPTION_DEBUG_MESSAGES = false;
         static bool OPTION_OVERWRITE_FILES = false;
-        static string version = "0.04";
+        static string version = "0.05";
 
         static void help() {
             Console.WriteLine("Usage:");
@@ -69,12 +69,12 @@ namespace fpcopy {
 
         static void Main(string[] args) {
 
-            Console.WriteLine("\nfpCopy v"+version+ " ©2018 Pablo Saavedra López. FullPathCopy copies a file creating full source file path into destination directory.");
+            Console.WriteLine("\nfpCopy v"+version+ " ©2019 Pablo Saavedra López. FullPathCopy copies a file creating full source file path into destination directory.");
             
-            if (args.Length<2) {
+            if (args.Length<1) {
                 help();
                 Environment.Exit(ERROR_INVALID_ARGUMENTS);
-            } else if (args.Length >= 2) {
+            } else {
                 //Check command line arguments
                 ArrayList argsAL = new ArrayList(args);
                 for (int i=argsAL.Count-1; i>=0; i--) {
@@ -92,13 +92,23 @@ namespace fpcopy {
                     }
                 }
 
-                if (argsAL.Count != 2) {
+                if (argsAL.Count == 0 || argsAL.Count > 2) {
                     help();
                     Environment.Exit(ERROR_INVALID_ARGUMENTS);
                 }
 
+                
+                String destDirStr = "";
                 String sourceFileStr = (String)argsAL[0];
-                String destDirStr = (String)argsAL[1];
+
+                if (argsAL.Count == 1) {
+                    String rootDrive = Path.GetPathRoot(Environment.SystemDirectory);
+                    DateTime now = DateTime.Now;
+                    String nowAsString = now.ToString("yyyyMMddThh_mm_ss");
+                    destDirStr = rootDrive + "fpcopy/" + nowAsString + "/";
+                } else if (argsAL.Count == 2) {
+                    destDirStr = (String)argsAL[1];
+                }
 
                 //Replace '/' with '\'
                 sourceFileStr = sourceFileStr.Replace('/', '\\');
